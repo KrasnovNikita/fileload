@@ -1,12 +1,12 @@
 package com.datatech.oschad.fileload.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * @author N. Krasnov created on 22.03.2018
  */
 
-@ConfigurationProperties("storage")
+@Component
 public class StorageProperties {
 
     /**
