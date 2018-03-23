@@ -1,8 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
+    <style>
+        #uploadProgress {
+            width: 25%;
+            background-color: #ddd;
+        }
+        #uploadBar {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
 
 <div th:if="${message}">
@@ -18,13 +32,26 @@
     </form>
 </div>
 
-<div id = "uploadProgress">
-    <div id="progressBar">
-        <div id="label">
-       0%
-        </div>
-    </div>
+<div id="uploadProgress">
+    <div id="uploadBar"></div>
 </div>
+
+<script>
+    function move() {
+        var elem = document.getElementById("uploadBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1  + '%';
+            }
+        }
+    }
+</script>
 
 <div>
     <ul>
@@ -33,7 +60,6 @@
         </li>
     </ul>
 </div>
-
 
 </body>
 </html>
