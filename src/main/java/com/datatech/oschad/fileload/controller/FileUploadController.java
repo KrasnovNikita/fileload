@@ -1,6 +1,7 @@
 package com.datatech.oschad.fileload.controller;
 
 import com.datatech.oschad.fileload.service.StorageService;
+import com.datatech.oschad.fileload.validator.FileValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,12 +30,11 @@ public class FileUploadController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
-
+        FileValidator.validateFile(file);
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-
-        return "redirect:/";
+        return "redirect:success";
     }
 
 }
