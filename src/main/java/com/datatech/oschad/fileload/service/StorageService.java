@@ -9,7 +9,7 @@ public interface StorageService {
 
     void init();
 
-    void store(MultipartFile file);
+    void storeFile(MultipartFile file);
 
     void deleteAll();
 }

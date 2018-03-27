@@ -27,7 +27,7 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public void storeFile(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
 
@@ -35,7 +35,7 @@ public class StorageServiceImpl implements StorageService {
                     StandardCopyOption.REPLACE_EXISTING);
         }
         catch (IOException e) {
-            throw new StorageException("Failed to store file " + filename, e);
+            throw new StorageException("uploadFile.storageFailure", e);
         }
     }
 
@@ -50,7 +50,7 @@ public class StorageServiceImpl implements StorageService {
             Files.createDirectories(rootLocation);
         }
         catch (IOException e) {
-            throw new StorageException("Could not initialize storage", e);
+            throw new StorageException("uploadFile.init", e);
         }
     }
 }

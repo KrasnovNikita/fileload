@@ -13,20 +13,19 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileValidator {
 
     public static void validateFile(MultipartFile file) {
+        log.debug("Validating: {}", file);
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         if (file.isEmpty()) {
-            throw new StorageException("Failed to store empty file " + filename);
+            throw new StorageException("uploadFile.empty");
         }
         if (filename.contains("..")) {
             // This is a security check
             throw new StorageException(
-                    "Cannot store file with relative path outside current directory "
-                            + filename);
+                    "uploadFile.path");
         }
         if (!filename.contains(".zip")){
             throw new StorageException(
-                    "Failed to store file with incorrect extension "
-                            + filename);
+                    "uploadFile.extension");
         }
     }
 }
