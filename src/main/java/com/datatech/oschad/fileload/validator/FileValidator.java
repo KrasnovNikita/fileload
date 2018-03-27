@@ -2,8 +2,11 @@ package com.datatech.oschad.fileload.validator;
 
 import com.datatech.oschad.fileload.exception.StorageException;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tika.Tika;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author N. Krasnov created on 22.03.2018
@@ -27,8 +30,14 @@ public class FileValidator {
             throw new StorageException(
                     "uploadFile.extension");
         }
-        if (!file.getContentType().equals("application/x-zip-compressed")) {
-                    throw new StorageException("uploadFile.format");
+       Tika tika = new Tika();
+        try {
+            String detectedType = tika.detect(file.getBytes());
+            if (!detectedType.equals("application/x-zip-compressed")) {
+                throw new StorageException("uploadFile.format");
+            }
+        } catch (IOException e) {
         }
+
     }
 }
