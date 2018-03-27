@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -11,7 +11,7 @@
         .percent { position:absolute; display:inline-block; top:3px; left:48%; }
     </style>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script>
         $(document).ready(function() {
@@ -42,6 +42,10 @@
 </head>
 
 <body>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
 
 <div>
     <form method="POST" enctype="multipart/form-data" action="/">
