@@ -30,10 +30,10 @@ public class FileValidator {
             throw new StorageException(
                     "uploadFile.extension");
         }
-       Tika tika = new Tika();
         try {
+            Tika tika = new Tika();
             String detectedType = tika.detect(file.getBytes());
-            if (!detectedType.equals("application/x-zip-compressed")) {
+            if (!detectedType.equals("application/zip")) {
                 throw new StorageException("uploadFile.format");
             }
         } catch (IOException e) {
