@@ -23,9 +23,12 @@ public class FileValidator {
             throw new StorageException(
                     "uploadFile.path");
         }
-        if (!filename.contains(".zip")){
+        if (!filename.contains(".zip")) {
             throw new StorageException(
                     "uploadFile.extension");
+        }
+        if (!file.getContentType().equals("application/x-zip-compressed")) {
+                    throw new StorageException("uploadFile.format");
         }
     }
 }
