@@ -31,13 +31,16 @@ public class FileValidator {
                     "uploadFile.extension");
         }
         try {
-            Tika tika = new Tika();
+           Tika tika = new Tika();
             String detectedType = tika.detect(file.getBytes());
             if (!detectedType.equals("application/zip")) {
                 throw new StorageException("uploadFile.format");
             }
         } catch (IOException e) {
+            throw new StorageException("uploadFile.storageFailure");
         }
 
     }
+
+
 }
